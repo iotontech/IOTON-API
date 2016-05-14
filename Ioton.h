@@ -66,7 +66,7 @@ public:
 		Mode.write(1);
 		Reset.write(0);
 
-        if (this->isButtonPressed())
+        if (this->USERisPressed())
         {
             *((unsigned long *) 0x2001FFFC) = 0xB00710AD;
             NVIC_SystemReset();
