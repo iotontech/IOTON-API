@@ -1,0 +1,12 @@
+{
+  "name": "IOTON-API",
+  "keywords": "ioton, ton, mbed, stm32",
+  "description": "API - TON Board",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/iotontech/IOTON-API.git"
+  },
+  "frameworks": "mbed",
+  "platforms": "ststm32"
+}
