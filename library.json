@@ -8,5 +8,6 @@
     "url": "https://github.com/iotontech/IOTON-API.git"
   },
   "frameworks": "mbed",
-  "platforms": "ststm32"
+  "platforms": "ststm32",
+  "version": "0.0.1"
 }
