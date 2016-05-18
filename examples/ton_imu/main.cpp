@@ -1,5 +1,5 @@
 // Includes --------------------------------------------------------------------
-#include "Ioton.h"
+#include "main.h"
 
 
 // Private variables -----------------------------------------------------------
@@ -32,7 +32,6 @@ int main(void)
 		usb.printf("pitch: %0.3f\r\n", imu.getPitch());
 		usb.printf("roll: %0.3f\r\n", imu.getRoll());
 		usb.printf("yaw: %0.3f\r\n", imu.getYaw());
-		usb.printf("temp: %0.2f\r\n", imu.getTemperature());
 		usb.printf("\r\n");
 
 		ton.toggleLED(GREEN);
