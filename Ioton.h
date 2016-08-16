@@ -19,6 +19,7 @@
 
 #include "mbed.h"
 #include "BMX055.h"
+#include "ESP8266.h"
 #include "USBTon.h"
 
 #define ON	1
@@ -39,8 +40,8 @@ typedef enum
 
 
 Serial bluetooth(PA_9, PA_10);
-Serial wifi(PA_2, PA_3);
 USBTon usb;
+ESP8266 wifi(PA_2, PA_3);
 DigitalOut PWD(PB_12);
 DigitalOut Mode(PB_13);
 DigitalOut Reset(PC_15);
@@ -51,6 +52,8 @@ PwmOut ledGREEN(LED_GREEN);
 PwmOut ledBLUE(LED_BLUE);
 AnalogIn battery(PB_1);
 
+BMX055 imu;
+
 
 class Ioton
 {
@@ -59,8 +62,7 @@ public:
 	{
 		setLED(NONE);
 
-		bluetooth.baud(115200);
-		wifi.baud(115200);
+		bluetooth.baud(9600);
 
 		PWD.write(0);
 		Mode.write(1);
@@ -74,6 +76,18 @@ public:
 
 		wait_ms(1);
 		initUSB();
+	}
+
+	void enableBluetooth(void)
+	{
+		Reset.write(1);
+	}
+
+	void enableIMU(uint8_t mAscale = AFS_2G, uint8_t ACCBW  = ABW_125Hz,
+                uint8_t mGscale = GFS_125DPS, uint8_t GODRBW = G_200Hz23Hz,
+                uint8_t Mmode  = Regular, uint8_t MODR   = MODR_30Hz)
+	{
+		imu.init(mAscale, ACCBW, mGscale, GODRBW, Mmode, MODR);
 	}
 
 	void enableWifi(void)
