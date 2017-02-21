@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/iotontech/IOTON-API.git"
   },
-  "frameworks": "mbed-ton",
+  "frameworks": "mbed",
   "platforms": "ststm32",
   "version": "0.0.4"
 }
