@@ -23,9 +23,19 @@ public:
 
     bool connect(const char* ssid, const char* pass, uint8_t mode = 0)
     {
+        // Set CWMODE to 1=Station,2=AP,3=BOTH, default mode 1 (Station)
+        strcpy(cmdbuff, "AT+CWMODE=1\r\n");
+        sendCMD();
+        getReply(500, 20);
+
+        // DHCP Enabled in Station Mode
+        strcpy(cmdbuff, "AT+CWDHCP=1,1\r\n");
+        sendCMD();
+        getReply(500, 20);
+
         sprintf(cmdbuff,"AT+CWJAP=\"%s\",\"%s\"\r\n", ssid, pass);
         sendCMD();
-        getReply(8000, 50);
+        getReply(10000, 200);
 
         if (strstr(replybuff, "OK") == NULL) return false;
 
@@ -143,6 +153,10 @@ private:
             strcpy(cmdbuff, "AT+CIPMUX=0\r\n");
             sendCMD();
             getReply(500, 10);
+
+            sprintf(cmdbuff, "AT+CIPCLOSE\r\n");
+            sendCMD();
+            getReply(500, 600);
 
             return false;
         }
